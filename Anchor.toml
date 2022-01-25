@@ -1,0 +1,12 @@
+[programs.localnet]
+wallet_graph = "EtwuAvVdSA5W63ayt43PrggcijdcPXd5ntygh1LnKyz5"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/nathanshirley/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
