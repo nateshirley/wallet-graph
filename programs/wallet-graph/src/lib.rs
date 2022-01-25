@@ -12,6 +12,10 @@ pub mod wallet_graph {
         ctx.accounts.connection.to = ctx.accounts.to.key();
         Ok(())
     }
+
+    pub fn revoke_connection(_ctx: Context<RevokeConnection>, _connection_bump: u8) -> ProgramResult {
+        Ok(())
+    }
 }
 
 
@@ -27,6 +31,20 @@ pub struct MakeConnection<'info> {
     )]
     connection: Account<'info, Connection>,
     system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+#[instruction(connection_bump: u8)]
+pub struct RevokeConnection<'info> {
+    from: Signer<'info>,
+    to: AccountInfo<'info>,
+    #[account(
+        mut,
+        seeds = [CONNECTION_SEED, from.key().as_ref(), to.key().as_ref()],
+        bump = connection_bump,
+        close = from
+    )]
+    connection: Account<'info, Connection>,
 }
 
 #[account]
