@@ -26,7 +26,7 @@ pub struct MakeConnection<'info> {
     #[account(
         init, 
         seeds = [CONNECTION_SEED, from.key().as_ref(), to.key().as_ref()],
-        bump,
+        bump, //canonical bump enforced on init
         payer = from
     )]
     connection: Account<'info, Connection>,
